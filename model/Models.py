@@ -1,5 +1,9 @@
 import sklearn 
 from sklearn.linear_model import LogisticRegression 
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import VotingClassifier
 
 class Model():
     def __init__(self, type, random_state=42, kernel= 'rbf', max_depth = 10, wandb=None, num_estimator= 100, voting="hard", save_model= None):
