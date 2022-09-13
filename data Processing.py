@@ -57,3 +57,4 @@ def read_data(filepath):
                                 type= ".dataset",
                                 description= "Raw Credit Card Dataset")
         run.log_artifact(raw_data)
+    return data
