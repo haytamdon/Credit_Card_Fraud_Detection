@@ -8,8 +8,8 @@ from sklearn.metrics import roc_auc_score
 import pickle
 import os
 
-def plot_wandb(wandb_login, project_name, model, X_train, X_test, y_train, y_test, y_pred, y_pred_proba, labels, model_name):
-    wandb.init(id=wandb_login, project=project_name)
+def plot_wandb(project_name, model, X_train, X_test, y_train, y_test, y_pred, y_pred_proba, labels, model_name):
+    wandb.init(project=project_name)
     wandb.sklearn.plot_confusion_matrix(y_test, y_pred, labels)
     wandb.sklearn.plot_summary_metrics(model, X_train, y_train, X_test, y_test)
     if y_pred_proba:
