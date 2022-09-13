@@ -5,6 +5,7 @@ import wandb
 from sklearn.metrics import f1_score
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import plot_confusion_matrix
 import pickle
 import os
 
@@ -30,10 +31,11 @@ def plot_auc_roc(y, y_pred):
     fpr, tpr, _ = roc_curve(y, y_pred)
     plt.figure(figsize=(16,8) )
     sns.lineplot(fpr,tpr,label="AUC="+str(auc))
-    
+    plt.show()
+
 def confusion_matrix(model, X, y):
     plot_confusion_matrix(model, X, y)
     plt.show()
-    
+
 def save_model(model, out_filepath, model_name):
     pickle.dump(model, open(os.path.join(out_filepath, model_name), 'wb'))
