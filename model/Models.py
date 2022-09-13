@@ -16,7 +16,7 @@ class Model():
     def get_model(self):
         model = None
         if self.type == 'Logistic regression':
-            model = LogisticRegression(self.random_state)
+            model = LogisticRegression(random_state = self.random_state)
         elif self.type == 'SVM':
             model = SVC(kernel = self.kernel, random_state = self.random_state)
         elif self.type == 'Decision Trees':
