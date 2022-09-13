@@ -45,10 +45,23 @@ def data_cleaning(data):
         raw_data_artifact = run.use_artifact('Credit_Card_Fraud_Detection_Dataset:latest')
         raw_dataset = raw_data_artifact.download()
         run.log_artifact(Scaled_data)
+    with wandb.init(project="Fraud Detection", job_type="preprocess-data") as run:
+        pca = PCA(n_components = 5)
+        X_train_res = pca.fit_transform(X_train_res)
+        X_test = pca.transform(X_test)
+        PCA_Data = wandb.Artifact(
+            "PCA_Data", type= "dataset", description='PCA dimension reduction with Standard Scaling'
+        )
+        # ✔️ declare which artifact we'll be using
+        raw_data_artifact = run.use_artifact('Credit_Card_Fraud_Detection_Dataset:latest')
+
+        # 📥 if need be, download the artifact
+        raw_dataset = raw_data_artifact.download()
+        run.log_artifact(PCA_Data)
     return X_train_res, y_train_res, X_test, y_test
 
-pickle.dump(pca, open("pca.pkl","wb"))
-pickle.dump(sc, open("StandardScaler.sav","wb"))
+pickle.dump(pca, open("../../Data_Processing_files/pca.pkl","wb"))
+pickle.dump(sc, open("../../Data_Processing_files/StandardScaler.sav","wb"))
 
 def read_data(filepath):
     with wandb.init(project="Fraud Detection", job_type="load-data") as run:
