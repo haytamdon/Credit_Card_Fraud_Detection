@@ -9,9 +9,7 @@ class Model():
         self.max_depth = max_depth
         self.num_estimator = num_estimator
         self.voting = voting
-        self.save_model = save_model
-        self.model = None
-    def define_type(self):
+    def get_model(self):
         model = None
         if self.type == 'Logistic regression':
             model = LogisticRegression(self.random_state)
@@ -27,19 +25,3 @@ class Model():
                         voting= self.voting
                         )
         return model
-    def fit(self, X_train, y_train):
-        self.model = define_type(self)
-        self.model.fit(X_train, y_train)
-        return self.model
-    def score(self, X, y):
-        return self.model.score(X,y)
-    
-    def predict(self, X):
-        return self.model.predict(X)
-    
-    def predict_proba(self,X):
-        return self.model.predict_proba(X)
-    
-    def Visualize_metrics(self, X, y):
-        y_pred = self.predict(X)
-        
