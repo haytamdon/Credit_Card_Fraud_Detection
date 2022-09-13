@@ -10,7 +10,7 @@ import wandb
 import pickle
 
 def data_cleaning(data):
-    with wandb.init(project="Fraud Detection", job_type="preprocess-data") as run:
+    with wandb.init(project="Fraud Detection 1", job_type="preprocess-data") as run:
         X = data.iloc[:,:-1]
         y = data.iloc[:, -1]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
@@ -24,7 +24,7 @@ def data_cleaning(data):
         raw_dataset = raw_data_artifact.download()
         run.log_artifact(Split_data)
         
-    with wandb.init(project="Fraud Detection", job_type="preprocess-data") as run:
+    with wandb.init(project="Fraud Detection 1", job_type="preprocess-data") as run:
         sm = SMOTE(random_state=2)
         X_train_res, y_train_res = sm.fit_resample(X_train, y_train)
         Oversampled_Data = wandb.Artifact(
@@ -34,7 +34,7 @@ def data_cleaning(data):
         raw_dataset = raw_data_artifact.download()
         run.log_artifact(Oversampled_Data)
         
-    with wandb.init(project="Fraud Detection", job_type="preprocess-data") as run:
+    with wandb.init(project="Fraud Detection 1", job_type="preprocess-data") as run:
         sc = StandardScaler()
         X_train_res = sc.fit_transform(X_train_res)
         X_test = sc.transform(X_test)
@@ -45,7 +45,7 @@ def data_cleaning(data):
         raw_data_artifact = run.use_artifact('Credit_Card_Fraud_Detection_Dataset:latest')
         raw_dataset = raw_data_artifact.download()
         run.log_artifact(Scaled_data)
-    with wandb.init(project="Fraud Detection", job_type="preprocess-data") as run:
+    with wandb.init(project="Fraud Detection 1", job_type="preprocess-data") as run:
         pca = PCA(n_components = 5)
         X_train_res = pca.fit_transform(X_train_res)
         X_test = pca.transform(X_test)
@@ -63,7 +63,8 @@ def data_cleaning(data):
     return X_train_res, y_train_res, X_test, y_test
 
 def read_data(filepath):
-    with wandb.init(project="Fraud Detection", job_type="load-data") as run:
+    wandb.login()
+    with wandb.init(project="Fraud Detection 1", job_type="load-data") as run:
         data = pd.read_csv(filepath)
         raw_data = wandb.Artifact('Credit_Card_Fraud_Detection_Dataset', 
                                 type= ".dataset",
