@@ -6,6 +6,10 @@ This is a credit card fraud detection project built using sklearn for data proce
 
 All of the requirements and dependancies for the project are available in the 'Requirements.txt' file
 
+## Data
+
+The [DATA](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) comes from the famous Kaggle data Credit Card Fraud Detection by MACHINE LEARNING GROUP
+
 ## Usage
 
 Run the 'main.py' script to load the model and to train and to log the main metrics, you can change the model to one of the models existing in the 'models.py' script and rerun the 'main.py' script with one of those models 
