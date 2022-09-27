@@ -4,7 +4,7 @@ This is a credit card fraud detection project built using sklearn for data proce
 
 ## Requirements
 
-All of the requirements and dependancies for the project are available in the 'Requirements.txt' file
+All of the requirements and dependancies for the project are available in the 'requirements.txt' file
 
 ## Data
 
